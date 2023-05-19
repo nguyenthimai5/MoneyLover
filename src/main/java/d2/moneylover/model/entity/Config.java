@@ -9,11 +9,11 @@ public class Config {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-    @Column(name = "key")
+    @Column(name = "`key`")
     private String key;
     @Column(name = "value")
     private String value;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id",referencedColumnName = "id")
+    @JoinColumn(name = "user_id")
     private User user;
 }

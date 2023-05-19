@@ -34,9 +34,6 @@ public class Wallet {
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "wallet_budget",joinColumns = @JoinColumn(name = "wallet_id"), inverseJoinColumns = @JoinColumn(name = "budget_id"))
     private List<Budget> budgetList = new ArrayList<>();
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "wallet_category",joinColumns = @JoinColumn(name = "wallet_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private List<Category> categoryList=new ArrayList<>();
 
 
 
