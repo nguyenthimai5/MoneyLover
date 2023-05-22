@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chuyển đổi tiền tệ</title>
+    <th:block th:replace="user/index::css">
+    </th:block>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            margin-top: 13px;
+            height: 455px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .form-container {
+            flex-basis: 60%;
+            padding-right: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            height: 417px;
+        }
+
+        .history-container {
+            flex-basis: 35%;
+        }
+
+        h3 {
+            margin-top: 6px;
+            text-align: center;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+            margin-left: 14px;
+            margin-right: 14px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #666;
+        }
+
+        input[type="number"] {
+            width: 96%;
+            padding: 8px;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+            height: 33px;
+        }
+
+        select {
+            width: 96%;
+            padding: 8px;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+        }
+
+        .convert-button {
+            margin-left: 14px;
+            margin-bottom: 15px;
+            margin-right: 136px;
+            display: block;
+            width: 94%;
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px;
+            border-radius: 3px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            height: 39px;
+
+        }
+
+        .convert-button:hover {
+            background-color: #45a049;
+        }
+
+        .history {
+            margin-top: 30px;
+        }
+
+        .history-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f2f2f2;
+            border-radius: 3px;
+        }
+
+        .history-item:nth-child(even) {
+            background-color: #eaeaea;
+        }
+    </style>
+</head>
+<body>
+<th:block th:replace="user/index::header">
+</th:block>
+<div class="container">
+    <div class="form-container">
+        <h3>Chuyển đổi tiền tệ</h3>
+
+        <div class="form-group">
+            <label for="amount">Số tiền:</label>
+            <input type="number" id="amount" placeholder="Nhập số tiền" min="0" step="0.01" required>
+        </div>
+
+        <div class="form-group">
+            <label for="fromCurrency">Từ tiền tệ:</label>
+            <select id="fromCurrency">
+                <option value="vnd">VND</option>
+                <option value="usd">USD</option>
+                <!-- Thêm các loại tiền tệ khác vào đây -->
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="toCurrency">Đến tiền tệ:</label>
+            <select id="toCurrency">
+                <option value="vnd">VND</option>
+                <option value="usd">USD</option>
+                <!-- Thêm các loại tiền tệ khác vào đây -->
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="rate">Tỷ giá:</label>
+            <input type="number" id="rate" placeholder="Nhập tỷ giá" min="0" step="0.01" required>
+        </div>
+
+        <button class="convert-button" onclick="convertCurrency()">Chuyển đổi</button>
+    </div>
+
+    <div class="history-container">
+        <h3>Lịch sử chuyển đổi:</h3>
+        <div id="historyList"></div>
+    </div>
+</div>
+
+<script>
+    var historyList = [];
+
+    function convertCurrency() {
+        var amount = parseFloat(document.getElementById('amount').value);
+        var fromCurrency = document.getElementById('fromCurrency').value;
+        var toCurrency = document.getElementById('toCurrency').value;
+        var rate = parseFloat(document.getElementById('rate').value);
+
+        var result = amount * rate;
+
+        var historyItem = {
+            amount: amount,
+            fromCurrency: fromCurrency.toUpperCase(),
+            toCurrency: toCurrency.toUpperCase(),
+            rate: rate,
+            result: result.toFixed(2)
+        };
+
+        historyList.push(historyItem);
+        renderHistory();
+
+        document.getElementById('amount').value = '';
+        document.getElementById('rate').value = '';
+    }
+
+    function renderHistory() {
+        var historyListContainer = document.getElementById('historyList');
+        historyListContainer.innerHTML = '';
+
+        for (var i = 0; i < historyList.length; i++) {
+            var historyItem = historyList[i];
+
+            var itemContainer = document.createElement('div');
+            itemContainer.classList.add('history-item');
+
+            var itemText = document.createTextNode(historyItem.amount + ' ' + historyItem.fromCurrency + ' = ' + historyItem.result + ' ' + historyItem.toCurrency + ' (Tỷ giá: ' + historyItem.rate + ')');
+            itemContainer.appendChild(itemText);
+
+            historyListContainer.appendChild(itemContainer);
+        }
+    }
+</script>
+</body>
+</html>

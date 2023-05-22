@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gợi ý kết bạn</title>
+    <th:block th:replace="user/index::css">
+
+    </th:block>
+    <style>
+        /* Các quy tắc CSS để trang trí giao diện */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .friend-card {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+            width: 193px;
+        }
+
+        .friend-card img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .friend-card .friend-name {
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .add-friend-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .invitation-sent-button {
+            background-color: #999;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<th:block th:replace="user/index::header">
+
+</th:block>
+<h1>Gợi ý kết bạn</h1>
+
+<div class="friend-card" onclick="goToProfile(1)">
+    <img src="path/to/friend1.jpg" alt="Friend 1">
+    <div>
+        <div class="friend-name">Nguyễn Văn A</div>
+        <button id="addFriendButton1" class="add-friend-button" onclick="toggleFriendshipStatus(1)">Thêm bạn bè</button>
+    </div>
+</div>
+
+<div class="friend-card" onclick="goToProfile(2)">
+    <img src="path/to/friend2.jpg" alt="Friend 2">
+    <div>
+        <div class="friend-name">Trần Thị B</div>
+        <button id="addFriendButton2" class="add-friend-button" onclick="toggleFriendshipStatus(2)">Thêm bạn bè</button>
+    </div>
+</div>
+
+<!-- Thêm các card bạn bè gợi ý khác vào đây -->
+
+<script>
+    function toggleFriendshipStatus(friendId) {
+        var addFriendButton = document.getElementById('addFriendButton' + friendId);
+
+        if (addFriendButton.innerText === 'Thêm bạn bè') {
+            // Thực hiện xử lý thêm bạn bè với friendId đã được truyền vào
+            // Có thể gửi yêu cầu kết bạn đến server hoặc thực hiện các tác vụ khác tương tự
+
+            // Thay đổi nút thành "Đã gửi lời mời"
+            addFriendButton.innerText = 'Đã gửi lời mời';
+            addFriendButton.classList.remove('add-friend-button');
+            addFriendButton.classList.add('invitation-sent-button');
+        } else if (addFriendButton.innerText === 'Đã gửi lời mời') {
+            // Thực hiện xử lý hủy yêu cầu kết bạn với friendId đã được truyền vào
+            // Có thể gửi yêu cầu hủy kết bạn đến server hoặc thực hiện các tác vụ khác tương tự
+
+            // Thay đổi nút thành "Thêm bạn bè"
+            addFriendButton.innerText = 'Thêm bạn bè';
+            addFriendButton.classList.remove('invitation-sent-button');
+            addFriendButton.classList.add('add-friend-button');
+        }
+    }
+
+    function goToProfile(friendId) {
+        // Thay thế đường dẫn bên dưới bằng đường dẫn trang cá nhân của bạn bè
+        // window.location.href = "path/to/friend-profile.php?id=" + friendId;
+    }
+</script>
+</body>
+</html>
