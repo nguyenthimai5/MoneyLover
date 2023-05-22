@@ -160,6 +160,10 @@ public class User {
         this.image = image;
     }
 
+    public String getRole() {
+        return role;
+    }
+
     public void setRole(String role) {
         this.role = role;
     }
@@ -222,5 +226,6 @@ public class User {
     public String getRole() {
         return role;
     }
+
 
 }

@@ -1,5 +1,6 @@
 package d2.moneylover.controller;
 
+
 import d2.moneylover.dto.RegisterResquest;
 import d2.moneylover.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -53,6 +54,32 @@ public class UserController {
         userService.registerUser(userDto);
         model.addAttribute("registrationSuccess", true);
         return "redirect:/login";
+    }
+
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class UserController {
+    @GetMapping
+    public String index() {
+        return "/user/index";
+    }
+
+    @GetMapping("/about")
+    public String about() {
+        return "/user/about";
+    }
+
+    @GetMapping("/how")
+    public String how() {
+        return "/user/how";
+    }
+
+    @GetMapping("/wallet")
+    public String wallet() {
+        return "/user/wallet";
     }
 
 }

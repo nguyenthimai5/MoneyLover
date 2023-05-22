@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My Wallet</title>
+    <th:block th:replace="user/index::css">
+
+    </th:block>
+    <style>
+        body {
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            grid-template-columns: repeat(2, 1fr);
+            flex-direction: column;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .wallet-list {
+            flex-basis: 50%;
+            /*background-color: #e8f5e9;*/
+            border-radius: 8px;
+            padding: 20px;
+            margin-right: 20px;
+            /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
+            margin-bottom: 20px;
+        }
+
+        /*.wallet-item {*/
+        /*  cursor: pointer;*/
+        /*  margin-bottom: 10px;*/
+
+        /*}*/
+        .wallet-item {
+            cursor: pointer;
+            background-color: #e8f5e9;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: flex-basis 0.3s;
+
+        }
+
+        .wallet-item img {
+
+
+
+            margin-bottom: 10px;
+            width: 100px;
+            border-radius: 64px;
+        }
+
+        .wallet-item h3 {
+            color: #333;
+            font-size: 20px;
+            margin-top: 0;
+        }
+
+        .wallet-item p {
+            color: #555;
+            font-size: 16px;
+            margin-bottom: 0;
+        }
+
+        .wallet-detail {
+            flex-basis: 50%;
+            background-color: #e8f5e9;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: none;
+            height: 443px;
+
+        }
+
+        .wallet-detail.active {
+            display: block;
+            text-align: center;
+            margin-top: -5px;
+        }
+
+
+        .wallet-detail h2 {
+            color: #333;
+            font-size: 24px;
+            margin-top: 0;
+        }
+
+        .wallet-detail p {
+            color: #555;
+            font-size: 18px;
+            margin-bottom: 0;
+            text-align: left;
+            margin-top: 11px;
+        }
+
+
+        .container.active {
+            display: grid;
+            justify-content: center;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        @media (max-width: 600px) {
+            .container.active {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+<th:block th:replace="user/index::header">
+
+</th:block>
+<div class="container">
+    <div class="wallet-list">
+        <div class="wallet-item" onclick="showWalletDetail(1)">
+            <img src="wallet1.jpg" alt="Wallet 1">
+            <h3>Wallet 1</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+
+    </div>
+    <div class="wallet-detail" id="walletDetail">
+        <h2>Wallet Details</h2>
+        <img src="https://png.pngtree.com/png-clipart/20210128/ourlarge/pngtree-the-wallet-is-empty-png-image_2816298.jpg" alt="Science Image">
+        <p>Balance: $500</p>
+        <p>Currency: USD</p>
+        <p>User: John Doe</p>
+    </div>
+    <div class="wallet-list">
+        <div class="wallet-item" onclick="showWalletDetail(1)">
+            <img src="wallet1.jpg" alt="Wallet 1">
+            <h3>Wallet 1</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+    </div>
+
+
+</div>
+
+<script>
+    function showWalletDetail(walletId) {
+        const container = document.querySelector('.container');
+        const walletDetail = document.getElementById('walletDetail');
+
+        container.classList.toggle('active');
+        walletDetail.classList.toggle('active');
+    }
+</script>
+</body>
+</html>
