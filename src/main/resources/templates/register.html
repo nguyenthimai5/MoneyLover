@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">    <title>Money Lover - Đăng ký</title>
+  <link th:href="@{../static/register.css}" rel="stylesheet" />
+
+</head>
+<style>
+  .container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  h1 {
+    text-align: center;
+  }
+
+  form {
+    margin-top: 20px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  input[type="text"],
+  input[type="date"],
+  input[type="email"],
+  input[type="password"] {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .social-login {
+    margin-top: 20px;
+  }
+
+  .social-login p {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .fb-login,
+  .gg-login {
+    width: 100%;
+    padding: 10px;
+    background-color: #3b5998; /* Màu Facebook */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .gg-login {
+    background-color: #db4a39; /* Màu Google */
+  }
+
+  .login-link {
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  .login-link a {
+    color: #337ab7; /* Màu liên kết */
+  }
+
+</style>
+<body>
+<div class="container">
+  <h1>Money Lover</h1>
+  <form th:action="@{/register}" method="post" th:object="${user}">
+    <h2>Đăng ký tài khoản</h2>
+    <label for="firstName">Họ:</label>
+    <input type="text" id="firstName" name="firstName" th:field="*{firstName}" required>
+    <label for="lastName">Tên:</label>
+    <input type="text" id="lastName" name="lastName" th:field ="*{lastName}" required>
+    <label for="lastName">Ngày sinh:</label>
+    <input type="date" id="birthday"  onchange="formatDateString()">
+    <input type="hidden" id="valueBirthday" name="birthday" th:value="${user.birthday}">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" th:field="*{email}" required>
+    <label for="name">Tên đăng nhập:</label>
+    <input type="text" id="name" name="name" th:field="*{name}" required>
+    <label for="password">Mật khẩu:</label>
+    <input type="password" id="password" name="password" required>
+    <div class="social-login">
+      <p>Hoặc đăng ký bằng:</p>
+      <button type="button" class="fb-login">Facebook</button>
+      <button type="button" class="gg-login">Google</button>
+    </div>
+    <button type="submit">Đăng ký</button>
+    <div class="login-link">
+      <p>Đã có tài khoản? <a href="/login">Đăng nhập</a></p>
+    </div>
+  </form>
+</div>
+<script>
+  function formatDateString() {
+    var dateInput = document.getElementById("birthday");
+    var dateValue = dateInput.value;
+    var formattedDate = formatDate(dateValue);
+    document.getElementById("valueBirthday").value= formattedDate;
+  }
+  function formatDate(dateString) {
+    var date = new Date(dateString);
+
+    var day = date.getDate();
+    if (day < 10) {
+      day = "0" + day;
+    }
+
+    var month = date.getMonth() + 1;
+    if (month < 10) {
+      month = "0" + month;
+    }
+
+    var year = date.getFullYear();
+
+    return day + "/" + month + "/" + year;
+  }
+</script>
+</body>
+</html>
