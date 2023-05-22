@@ -24,4 +24,14 @@ public class UserController {
     public String wallet() {
         return "/user/wallet";
     }
+
+    @GetMapping("/add")
+    public String addFriend() {
+        return "/user/addFriend";
+    }
+
+    @GetMapping("/currency")
+    public String currencyconversion() {
+        return "/user/currencyconversion";
+    }
 }
