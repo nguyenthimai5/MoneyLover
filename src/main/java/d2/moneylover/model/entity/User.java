@@ -27,6 +27,8 @@ public class User {
     private String email;
     @Column(name = "create_date")
     private Date createDate;
+
+
     @Column(name = "birthday")
     private Date birthday;
     @Column(name = "status")
@@ -221,4 +223,6 @@ public class User {
     public void setNotificationList(List<Notification> notificationList) {
         this.notificationList = notificationList;
     }
+
+
 }
