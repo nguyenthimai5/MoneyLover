@@ -1,10 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Spring Security Example</title>
 </head>
 <body>
-<h1>Đăng nhập thành công</h1>
+<h1>Đây là trang home!!</h1>
+<div th:if="${username}">
+    <p>Xin chào, <span th:text="${username}"></span>!</p>
+</div>
+
+<div th:if="${!#authorization.expression('isAuthenticated()')}">
+    <a th:href="@{/login}">Login</a>
+</div>
+<p><a style="text-align: center" th:href="@{/user}">Bấm vào đây để vào trang user</a></p>
+<p><a style="text-align: center" th:href="@{/admin}">Bấm vào đây để vào trang admin</a></p>
+
+<div th:if="${#authorization.expression('isAuthenticated()')}">
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRon8Zvy4yUaAMoI0v-HPpZvBUF2bRRlL0oM3v4616cIA&s">
+</div>
+
+
 </body>
 </html>

@@ -3,6 +3,8 @@ package d2.moneylover.controller;
 
 import d2.moneylover.dto.RegisterResquest;
 import d2.moneylover.service.UserService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,27 +19,23 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
-    @GetMapping("/index")
+    @GetMapping("")
     public String index(){
         return "/admin/index";
     }
-    @GetMapping("/home")
-    public String home(){
-        return "home";
-    }
-  /*  @PostMapping("/home")
-    public String login(@RequestParam("username") String username, @RequestParam("password") String password,Authentication authentication,Model model) {
+    @GetMapping(value = {"/","/home"})
+    public String homePage(Model model, Authentication authentication){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         auth.getName();
         //lấy đối tượng Authentication thông qua tham số của phương thức home()
         if (authentication != null && authentication.isAuthenticated()) {
             //kiểm tra xem người dùng đã được xác thực hay chưa
-            String name = authentication.getName();
+            String username = authentication.getName();
             model.addAttribute("username", username);
             //Authentication và truyền vào biến model để hiển thị trên giao diện
         }
         return "home";
-    }*/
+    }
     @GetMapping("/login")
     public String login() {
         return "login";
@@ -55,32 +53,5 @@ public class UserController {
         model.addAttribute("registrationSuccess", true);
         return "redirect:/login";
     }
-
-
-/*import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-
-@Controller
-public class UserController {
-    @GetMapping
-    public String index() {
-        return "/user/index";
-    }
-
-    @GetMapping("/about")
-    public String about() {
-        return "/user/about";
-    }
-
-    @GetMapping("/how")
-    public String how() {
-        return "/user/how";
-    }
-
-    @GetMapping("/wallet")
-    public String wallet() {
-        return "/user/wallet";
-    }*/
-
 }
 
