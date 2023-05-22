@@ -85,13 +85,19 @@
 <body>
 <div class="container">
     <h1>Money Lover</h1>
-    <div th:if="${registrationSuccess}">
-        <div class="alert alert-success" role="alert">
-            Đăng ký thành công! Vui lòng đăng nhập.
-        </div>
-    </div>
-    <form id="loginForm" th:action="@{/loginn}" method="post">
 
+    <form id="loginForm" th:action="@{/loginn}" method="post">
+        <div th:if="${param.logoutSuccess}">
+            <p>Đăng xuất thành công!</p>
+        </div>
+        <div th:if="${registrationSuccess}">
+            <div class="alert alert-success" role="alert">
+                Đăng ký thành công! Vui lòng đăng nhập.
+            </div>
+        </div>
+        <div th:if="${session.errorMessage}">
+            <span style="color: red" th:text="${session.errorMessage}" class="error-message"></span>
+        </div>
         <h2>Đăng nhập</h2>
         <label for="userName">Tên đăng nhập:</label>
         <input type="text" id="userName" required>
