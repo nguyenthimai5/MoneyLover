@@ -1,6 +1,7 @@
 package d2.moneylover.controller;
 
 
+import d2.moneylover.dto.LoginResquest;
 import d2.moneylover.dto.RegisterResquest;
 import d2.moneylover.service.UserService;
 import org.springframework.security.core.Authentication;
@@ -36,10 +37,7 @@ public class UserController {
         }
         return "home";
     }
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
+
 
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
@@ -54,47 +52,19 @@ public class UserController {
         return "redirect:/login";
     }
 
-
-
-/*import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-
-@Controller
-public class UserController {
-    @GetMapping
-    public String index() {
-        return "/user/index";
+    @GetMapping("/login")
+    public String showLoginForm(Model model) {
+        model.addAttribute("user",new LoginResquest());
+        return "login"; // Trả về tên của tệp HTML đăng nhập
     }
 
-    @GetMapping("/about")
-    public String about() {
-        return "/user/about";
+    @PostMapping("/loginn")
+    public String login(@ModelAttribute("user") LoginResquest userDto, Model model) {
+        System.out.println(userDto.getName());
+        System.out.println("Vào đây");
+        // Thực hiện xác thực người dùng và xử lý logic đăng nhập
+        return "redirect:/home"; // Chuyển hướng sau khi đăng nhập thành công
     }
-
-    @GetMapping("/how")
-    public String how() {
-        return "/user/how";
-    }
-
-    @GetMapping("/wallet")
-    public String wallet() {
-        return "/user/wallet";
-
-    }
-
-    @GetMapping("/add")
-    public String addFriend() {
-        return "/user/addFriend";
-    }
-
-    @GetMapping("/currency")
-    public String currencyconversion() {
-        return "/user/currencyconversion";
-    }
-=======
-    }*/
-
-
 
 }
 

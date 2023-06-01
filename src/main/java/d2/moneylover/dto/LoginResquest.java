@@ -4,12 +4,12 @@ public class LoginResquest {
     private String name;
     private String password;
 
-    public LoginResquest() {
-    }
-
     public LoginResquest(String name, String password) {
         this.name = name;
         this.password = password;
+    }
+
+    public LoginResquest() {
     }
 
     public String getName() {
